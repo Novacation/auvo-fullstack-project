@@ -1,0 +1,24 @@
+﻿@model List<string>
+
+@{
+    Layout = "_CitiesLayout";
+    var userName = ((ViewData["UserName"] as string)!).Split(' ')[0];
+
+}
+
+<header class="w-full flex justify-center items-center p-2 bg-orange-600 text-neutral-200">
+    <span class="font-medium">Bem vindo(a) @userName</span>
+</header>
+
+<section class="w-full mx-auto max-w-[768px] flex flex-col justify-start items-center my-10 gap-y-10 bg-neutral-900 py-5">
+    @if (Model is not null && Model.Count > 0)
+    {
+        <h2 class="text-xl w-11/12 text-neutral-200">Cidades favoritas</h2>
+        @foreach (var city in Model)
+        {
+            <ul class="w-full flex flex-col justify-start items-center gap-y-5">
+                <span class="text-indigo-200 w-11/12 font-bold p-2 bg-indigo-600">@city</span>
+            </ul>
+        }
+    }    
+</section>

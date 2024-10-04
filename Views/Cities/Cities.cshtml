@@ -1,0 +1,55 @@
+﻿@model GloboClimaPlatform.Infra.ExternalApis.ResponsesDTOs.OpenWeather.GetClimateDataByCityNameApiResponseDto
+
+@{
+    Layout = "_CitiesLayout";
+    ViewData["Title"] = "Cities";
+
+    var userName = ((ViewData["UserName"] as string)!).Split(' ')[0];
+
+    var errorMessage = TempData["Error"] as string;
+    
+    var successMsg = TempData["SuccessMsg"] as string;
+
+    double KelvinToCelsius(double kelvin)
+    {
+        return Math.Round(kelvin - 273.15, 2);
+    }
+}
+
+<header class="w-full flex justify-center items-center p-2 bg-orange-600 text-neutral-200">
+    <span class="font-medium">Bem vindo(a) @userName</span>
+</header>
+
+@if (@errorMessage is not null && @errorMessage.Length > 0)
+{
+    <span class="w-11/12 shadow bg-red-600 text-red-200 p-2 text-start my-5">@errorMessage</span>
+}
+
+@if (@successMsg is not null && @successMsg.Length > 0)
+{
+<span class="w-11/12 shadow bg-green-600 text-green-200 p-2 text-start my-5">@successMsg</span>
+}
+
+<section class="w-full mx-auto max-w-[768px] flex flex-col justify-start items-center my-10 gap-y-10">
+
+    <a asp-controller="Cities" asp-action="FavoriteCitiesView" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Ver favoritos
+    </a>
+    
+    @await Html.PartialAsync("Cities/SearchCityInput")
+
+    @if (Model is not null)
+    {
+        <div class="flex flex-col justify-start items-center w-11/12 p-2 bg-orange-200 rounded">
+            <h2 class="text-orange-600 font-medium text-start w-full p-2">Cidade pesquisada: @Model.Name</h2>
+
+            <span class="text-orange-600 w-full p-2">Temp atual: @KelvinToCelsius(Model.Main.Temp)°C</span>
+
+            <span class="text-orange-600 w-full p-2">Temp Máx: @KelvinToCelsius(Model.Main.Temp_Max)°C</span>
+
+            <span class="text-orange-600 w-full p-2">Temp Mín: @KelvinToCelsius(Model.Main.Temp_Min)°C</span>
+
+            @await Html.PartialAsync("Cities/FavoriteCityForm", @Model.Name)
+        </div>
+    }
+</section>

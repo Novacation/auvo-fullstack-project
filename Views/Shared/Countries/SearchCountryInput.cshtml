@@ -1,0 +1,11 @@
+﻿@using (Html.BeginForm("GetCountryByName", "Countries", FormMethod.Post, new { @class = "flex w-11/12 shadow-md px-5 py-10 flex-col justify-start items-center mt-14 bg-neutral-950 gap-y-6" }))
+{
+    <label class="w-full">
+        <input type="text" class="w-full text-neutral-800 p-1" name="CountryName" placeholder = "Nome do país" maxlength="70"/>
+    </label>
+    
+    <button type="submit" class="bg-neutral-800 text-neutral-300 font-semibold text-black py-1 px-10">
+        Enviar
+    </button>
+}
+

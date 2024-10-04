@@ -1,5 +1,22 @@
 ﻿@{
-    
+    Layout = "_HomeLayout";
+    var userName = ((ViewData["UserName"] as string)!).Split(' ')[0];
+
 }
 
-<span>Bem vindo </span>
+<header class="w-full flex justify-center items-center p-2 bg-orange-600 text-neutral-200">
+    <span class="font-medium">Bem vindo(a) @userName</span>
+</header>
+
+<section class="mt-10 w-11/12 gap-10 flex flex-col justify-start items-center p-2">
+
+    <a asp-controller="Countries" asp-action="CountriesView" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Países
+    </a>
+
+    <a asp-controller="Cities" asp-action="CitiesView" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Cidades
+    </a>
+
+   
+</section>

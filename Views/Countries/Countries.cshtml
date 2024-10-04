@@ -1,0 +1,70 @@
+﻿@model GloboClimaPlatform.Infra.ExternalApis.ResponsesDTOs.CountryByNameApiResponseDto
+
+@{
+    Layout = "_CountriesLayout";
+    ViewData["Title"] = "Countries";
+
+    var userName = ((ViewData["UserName"] as string)!).Split(' ')[0];
+
+    var errorMessage = TempData["Error"] as string;
+    
+    var successMsg = TempData["SuccessMsg"] as string;
+}
+
+<header class="w-full flex justify-center items-center p-2 bg-orange-600 text-neutral-200">
+    <span class="font-medium">Bem vindo(a) @userName</span>
+</header>
+
+@if (@errorMessage is not null && @errorMessage.Length > 0)
+{
+    <span class="w-11/12 shadow bg-red-600 text-200 p-2 text-start my-5">@errorMessage</span>
+}
+
+@if (@successMsg is not null && @successMsg.Length > 0)
+{
+<span class="w-11/12 shadow bg-green-600 text-green-200 p-2 text-start my-5">@successMsg</span>
+}
+
+<section class="w-full mx-auto max-w-[768px] flex flex-col justify-start items-center my-10 gap-y-10">
+
+    <a asp-controller="Countries" asp-action="FavoriteCountriesView" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Ver favoritos
+    </a>
+    
+    @await Html.PartialAsync("Countries/SearchCountryInput")
+
+    @if (Model is not null)
+    {
+        <div class="w-11/12 p-2 flex flex-col gap-y-4 justify-start items-center shadow">
+            <h2 class="mx-auto w-full text-xl">@Model.Name.Common</h2>
+
+            @await Html.PartialAsync("Countries/FavoriteCountryForm", @Model.Name.Common)
+
+            <span class="w-full shadow bg-green-600 text-neutral-200 p-2 text-start">Capital: @Model.Capital[0]</span>
+
+            <span class="w-full shadow bg-yellow-600 text-neutral-200 p-2 text-start">População: @Model.Population habitantes</span>
+
+            @if (@Model.Currencies.Count > 0)
+            {
+                <div class="flex p-2 flex-col bg-indigo-600 justify-start items-center gap-y-4 w-full">
+                    <span class="w-full text-neutral-200 p-2 text-start">Moeda(s)</span>
+                    @foreach (var item in @Model.Currencies)
+                    {
+                        <span class="w-full bg-neutral-200 text-neutral-800 p-2 text-start">@item.Value.Name</span>
+                    }
+                </div>
+            }
+
+            @if (@Model.Languages.Count > 0)
+            {
+                <div class="flex p-2 flex-col bg-purple-600 justify-start items-center gap-y-4 w-full">
+                    <span class="w-full text-neutral-200 p-2 text-start">Idioma(s)</span>
+                    @foreach (var item in @Model.Languages)
+                    {
+                        <span class="w-full bg-neutral-200 text-purple-800 p-2 text-start">@item.Value</span>
+                    }
+                </div>
+            }
+        </div>
+    }
+</section>

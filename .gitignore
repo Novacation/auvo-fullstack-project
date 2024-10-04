@@ -1,0 +1,77 @@
+﻿# .NET Core
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+*.pdb
+*.cache
+*.log
+
+# User-specific files
+*.rsuser
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# Visual Studio specific
+.vscode/
+.vscode/*
+
+# Rider specific
+.idea/
+.idea/*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# ASP.NET Core Secret Manager secrets.json file
+secrets.json
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains Rider
+.idea/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Coverage Directory used by tools like istanbul
+coverage/
+
+# DotNet Publish Directory
+.publish/
+
+# Transient dependency folders
+packages/
+!packages/build/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# Database files
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+
+# Entity Framework Migrations
+Migrations/
+
+# Local development environment settings
+Properties/launchSettings.json

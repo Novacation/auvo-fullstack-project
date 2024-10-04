@@ -1,0 +1,11 @@
+﻿@model string
+@using (Html.BeginForm("FavoriteCity", "Cities", FormMethod.Post))
+{
+    <label class="w-full">
+        <input type="hidden" name="CityName" maxlength="70" value="@Model"/>
+    </label>
+
+    <button type="submit" class="bg-orange-500 text-orange-300 font-semibold text-black py-1 px-10 mt-4">
+        Favoritar
+    </button>
+}
