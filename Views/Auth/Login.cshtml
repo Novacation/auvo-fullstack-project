@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    var errorMessage = TempData["Error"] as string;
+}
+
+@if (@errorMessage is not null && @errorMessage.Length > 0)
+{
+    <span class="w-11/12 shadow bg-red-600 text-200 p-2 text-start my-5">@errorMessage</span>
+}
+
+
+@using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "flex w-11/12 shadow-md px-5 py-10 flex-col justify-start items-center mt-14 bg-neutral-950 gap-y-6" }))
+{
+    <label class="w-full">
+        @Html.TextBox("email", null, new { @class = "w-full text-neutral-800 p-1", @id = "email", @name = "Email", @placeholder = "Email", @maxlength = 70 })
+    </label>
+
+    <label class="w-full">
+        @Html.Password("password", null, new { @class = "w-full text-neutral-800 p-1", @id = "password", @name = "Password", @placeholder = "Senha", @maxlength = 70 })
+    </label>
+
+    <button type="submit" class="bg-neutral-800 text-neutral-300 font-semibold text-black py-1 px-10">
+        Login
+    </button>
+    
+    <a asp-controller="Auth" asp-action="RegisterView" class="text-sm underline text-orange-600 mt-5">Não tem uma conta? Cadastre-se</a>
+}
